@@ -1,0 +1,28 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: spacewalk-client-centos7
+    image: milcom/centos7-systemd
+    image_version: latest
+    privileged: true
+    groups:
+      - elseven
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  inventory:
+    group_vars:
+      elseven:
+        spacewalk_client_version: 7
+scenario:
+  name: default
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

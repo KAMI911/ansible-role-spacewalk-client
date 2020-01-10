@@ -1,0 +1,33 @@
+---
+# spacewalk client register tasks file for ansible-role-spacewalk-client
+
+- name: install Spacewalk client
+  yum:
+    name: '{{ spacewalk_client_download_dir }}/{{ spacewalk_client_download_file }}'
+    state: present
+
+- name: install packages
+  package:
+    name: '{{ spacewalk_client_pacakges }}'
+    state: present
+
+- name: register to spacewalk server
+  become: true
+  become_user: '{{ spacewalk_client_root_user }}'
+  shell: >
+    rhnreg_ks --serverUrl={{ spacewalk_client_server_url }} --sslCACert={{ spacewalk_client_ca_cert_path }} \
+     --activationkey={{ spacewalk_client_activation_key }}
+  args:
+    creates: 'valami'
+  no_log: false
+  notify: restart spacewalk service
+
+- name: enable Spacewalk subscription
+  become: true
+  become_user: '{{ spacewalk_client_root_user }}'
+  shell: >
+    rhn-actions-control --enable-all
+  args:
+    creates: 'valami'
+  no_log: false
+  notify: restart spacewalk service

@@ -1,0 +1,29 @@
+---
+# tasks file for ansible-role-spacewalk-client
+
+- name: setting distro fact
+  set_fact:
+    distro: "{{ ansible_os_family }}-{{ spacewalk_client_ansible_distribution_major_version }}"
+  when: ansible_os_family != 'Debian'
+  tags:
+    - always
+
+# load version-specific variables
+- name: include vars
+  block:
+    - name: include vars
+      include_vars: "{{ item }}"
+      with_first_found:
+        - "../vars/{{ distro }}.yml"
+  rescue:
+    - name: include vars
+      fail: msg="Variables file for distro {{ distro }} were not found."
+
+- name: download Spacewalk client installer
+  include_tasks: download.yml
+
+- name: disable old repos
+  include_tasks: old_repos.yml
+
+- name: register Spacewalk client
+  include_tasks: register.yml

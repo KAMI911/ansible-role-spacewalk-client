@@ -1,0 +1,13 @@
+---
+# CentOS / RHEL
+
+spacewalk_client_download_url: '{{ spacewalk_client_el7_url }}'
+spacewalk_client_download_file: '{{ spacewalk_client_download_url | basename }}'
+
+spacewalk_client_pacakges:
+ - rhn-client-tools
+ - rhn-check
+ - rhn-setup
+ - rhnsd
+ - m2crypto
+ - yum-rhn-plugin

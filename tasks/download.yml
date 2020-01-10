@@ -1,0 +1,64 @@
+---
+# download task file for Spacewalk client
+
+#- name: check if Spacewalk is already installed
+#  stat:
+#    path: '{{ spacewalk_client_dir }}/README.txt'
+#  register: spacewalk_client_installed
+
+- name: create download directory
+  file:
+    path: '{{ spacewalk_client_download_dir }}'
+    owner: '{{ spacewalk_client_root_user }}'
+    group: '{{ spacewalk_client_root_group }}'
+    mode: '{{ spacewalk_client_dir_mode }}'
+    state: directory
+
+- name: is already downloaded locally
+  stat:
+    path: '{{ spacewalk_client_download_file }}'
+  delegate_to: localhost
+  register: spacewalk_client_is_local_download_file
+  when: spacewalk_client_installer_local
+
+- name: is already downloaded
+  stat:
+    path: '{{ spacewalk_client_download_dir }}/{{ spacewalk_client_download_file }}'
+  register: spacewalk_client_is_download_file
+
+- name: copy local Spacewalk tar file
+  copy:
+    src: '{{ spacewalk_client_download_file }}'
+    dest: '{{ spacewalk_client_download_dir }}/{{ spacewalk_client_download_file }}'
+    mode: 0644
+  when: (not spacewalk_client_is_download_file.stat.exists or spacewalk_client_installer_force_overwrite) and
+        not spacewalk_client_installer_force_download and spacewalk_client_installer_local
+
+- block:
+    - name: 'downloading Spacewalk {{ spacewalk_client_download_file }} to local machine'
+      get_url:
+        url: '{{ spacewalk_client_download_url }}'
+        validate_certs: '{{ spacewalk_client_download_validate_certs }}'
+        dest: './{{ spacewalk_client_download_file }}'
+        mode: 0644
+      delegate_to: localhost
+      run_once: true
+      when: (not spacewalk_client_is_local_download_file.stat.exists or spacewalk_client_installer_force_overwrite) and
+            spacewalk_client_installer_force_download
+
+    - name: copy downloaded Spacewalk tar file
+      copy:
+        src: '{{ spacewalk_client_download_file }}'
+        dest: '{{ spacewalk_client_download_dir }}/{{ spacewalk_client_download_file }}'
+        mode: 0644
+      when: (not spacewalk_client_is_download_file.stat.exists or spacewalk_client_installer_force_overwrite)
+  when: spacewalk_client_installer_local
+
+- name: 'download Spacewalk tar file {{ spacewalk_client_download_file }}'
+  get_url:
+    url: '{{ spacewalk_client_download_url }}'
+    dest: '{{ spacewalk_client_download_dir }}/{{ spacewalk_client_download_file }}'
+    validate_certs: '{{ spacewalk_client_download_validate_certs }}'
+    mode: 0644
+  when: (not spacewalk_client_is_download_file.stat.exists or spacewalk_client_installer_force_overwrite) and
+        spacewalk_client_installer_force_download and not spacewalk_client_installer_local
