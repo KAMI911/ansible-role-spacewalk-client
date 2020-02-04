@@ -22,8 +22,9 @@
 - name: download Spacewalk client installer
   include_tasks: download.yml
 
+- name: register Spacewalk client
+  include_tasks: register.yml
+
 - name: disable old repos
   include_tasks: old_repos.yml
 
-- name: register Spacewalk client
-  include_tasks: register.yml
