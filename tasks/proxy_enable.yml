@@ -12,19 +12,21 @@
     - yum_proxy
 
 - block:
-  - name: remove proxy username from yum when no spacewalk_client_proxy_yum_username is specified
+  - name: add proxy username to yum
     lineinfile:
       dest: /etc/yum.conf
-      regexp: '^[ \t]*spacewalk_client_proxy_username[ \t]*=[ \t]*.*'
-      state: absent
+      line: 'proxy_username={{ spacewalk_client_proxy_yum_username }}'
+      regexp: '^[ \t]*proxy_username[ \t]*=[ \t]*.*'
+      insertafter: '^[ \t]*proxy[ \t]*=[ \t]*.*'
     tags:
-      - yum_spacewalk_client_proxy_remove
+      - yum_proxy
 
-  - name: remove proxy password from yum when no spacewalk_client_proxy_yum_username is specified
+  - name: add proxy password to yum
     lineinfile:
       dest: /etc/yum.conf
-      regexp: '^[ \t]*spacewalk_client_proxy_password[ \t]*=[ \t]*.*'
-      state: absent
+      line: 'proxy_password={{ spacewalk_client_proxy_yum_password }}'
+      regexp: '^[ \t]*proxy_password[ \t]*=[ \t]*.*'
+      insertafter: '^[ \t]*proxy[ \t]*=[ \t]*.*'
     tags:
-      - yum_spacewalk_client_proxy_remove
-  when: spacewalk_client_proxy_yum_username | length == 0
+      - yum_proxy
+  when: spacewalk_client_proxy_yum_username | length > 0

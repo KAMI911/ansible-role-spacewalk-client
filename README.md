@@ -91,6 +91,14 @@ This variable sometimes does not get set and shouldn't be relied on.
 
 
 
+    spacewalk_client_proxy_yum_username:
+
+
+
+    spacewalk_client_proxy_yum_password:
+
+
+
     spacewalk_client_proxy_remove_after: true
 
 
