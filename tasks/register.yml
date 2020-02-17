@@ -18,7 +18,7 @@
     rhnreg_ks --serverUrl={{ spacewalk_client_server_url }} --sslCACert={{ spacewalk_client_ca_cert_path }} \
      --activationkey={{ spacewalk_client_activation_key }}
   args:
-    creates: 'valami'
+    creates: '/etc/sysconfig/rhn/up2date'
   no_log: false
   notify: restart spacewalk service
 
