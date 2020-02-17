@@ -1,11 +1,14 @@
 ---
 # disable repos tasks file for ansible-role-spacewalk-client
 
-- name: disabling original repos
-  lineinfile:
-    dest: '{{ item }}'
-    regexp: '^enabled=.*$'
-    line: 'enabled=0'
-    state: present
+- name: move original repos
+  command: 'mv "{{ item }}" "{{ item }}.old"'
   with_fileglob:
     - "/etc/yum.repos.d/*.repo"
+
+#- name: disabling original repos
+#  lineinfile:
+#    dest: '{{ item }}'
+#    regexp: '^enabled=.*$'
+#    line: 'enabled=0'
+#    state: present
