@@ -22,12 +22,12 @@
   no_log: false
   notify: restart spacewalk service
 
-- name: enable Spacewalk subscription
-  become: true
-  become_user: '{{ spacewalk_client_root_user }}'
-  shell: >
-    rhn-actions-control --enable-all
-  args:
-    creates: 'valami'
-  no_log: false
-  notify: restart spacewalk service
+#- name: enable Spacewalk subscription
+#  become: true
+#  become_user: '{{ spacewalk_client_root_user }}'
+#  shell: >
+#    rhn-actions-control --enable-all
+#  args:
+#    creates: 'valami'
+#  no_log: false
+#  notify: restart spacewalk service

@@ -38,6 +38,6 @@ spacewalk_client_root_group: 'root'
 
 spacewalk_client_download_dir: '{{ spacewalk_client_install_dir }}/tmp'
 
-spacewalk_client_service_name: osad
+spacewalk_client_service_name: rhnsd
 
 spacewalk_client_installed: false
