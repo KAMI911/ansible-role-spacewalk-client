@@ -1,0 +1,29 @@
+---
+# disable repo proxy tasks file for ansible-role-spacewalk-client
+
+- name: remove proxy from yum when spacewalk_client_proxy_remove_after is true
+  lineinfile:
+    dest: /etc/yum.conf
+    regexp: '^[ \t]*proxy[ \t]*=[ \t]*.*'
+    state: absent
+  when: spacewalk_client_proxy_remove_after
+  tags:
+    - yum_proxy_remove
+
+- block:
+  - name: remove proxy username from yum when no proxy_yum_username is specified
+    lineinfile:
+      dest: /etc/yum.conf
+      regexp: '^[ \t]*proxy_username[ \t]*=[ \t]*.*'
+      state: absent
+    tags:
+      - yum_proxy_remove
+
+  - name: remove proxy password from yum when no proxy_yum_username is specified
+    lineinfile:
+      dest: /etc/yum.conf
+      regexp: '^[ \t]*proxy_password[ \t]*=[ \t]*.*'
+      state: absent
+    tags:
+      - yum_proxy_remove
+  when: (spacewalk_client_proxy_yum_username | length == 0) and spacewalk_client_proxy_remove_after
