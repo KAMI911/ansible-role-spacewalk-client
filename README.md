@@ -31,14 +31,11 @@ None.
 
 
 
-
     spacewalk_client_service_status: 'restarted'  # Possible values are: reloaded, restarted, started, stopped
 
 
 
-
     force_spacewalk_client_install: false
-
 
 
 
@@ -88,6 +85,9 @@ This variable sometimes does not get set and shouldn't be relied on.
 
     spacewalk_client_el7_url: https://copr-be.cloud.fedoraproject.org/results/%40spacewalkproject/spacewalk-2.9-client/epel-7-x86_64/00911911-spacewalk-repo/spacewalk-client-repo-2.9-4.el7.noarch.rpm
 
+
+
+    spacewalk_client_proxy_yum_url:
 
 
 

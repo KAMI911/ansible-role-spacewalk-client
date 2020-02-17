@@ -19,6 +19,10 @@
     - name: include vars
       fail: msg="Variables file for distro {{ distro }} were not found."
 
+- name: enable yum proxy settings
+  include_tasks: proxy_enable.yml
+  when: spacewalk_client_proxy_remove_after
+
 - name: download Spacewalk client installer
   include_tasks: download.yml
 
@@ -28,6 +32,6 @@
 - name: disable old repos
   include_tasks: old_repos.yml
 
-- name: disable proxy settings
+- name: disable yum proxy settings
   include_tasks: proxy_disable.yml
   when: spacewalk_client_proxy_remove_after

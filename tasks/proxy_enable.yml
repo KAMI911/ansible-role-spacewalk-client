@@ -1,0 +1,30 @@
+---
+# enabble repo proxy tasks file for ansible-role-spacewalk-client
+
+- name: add proxy to yum
+  lineinfile:
+    dest: /etc/yum.conf
+    line: 'proxy={{ spacewalk_client_proxy_yum_url }}'
+    regexp: '^[ \t]*proxy[ \t]*=[ \t]*.*'
+    insertafter: '.*distroverpkg.*'
+  when: spacewalk_client_proxy_yum_url | length > 0
+  tags:
+    - yum_proxy
+
+- block:
+  - name: remove proxy username from yum when no spacewalk_client_proxy_yum_username is specified
+    lineinfile:
+      dest: /etc/yum.conf
+      regexp: '^[ \t]*spacewalk_client_proxy_username[ \t]*=[ \t]*.*'
+      state: absent
+    tags:
+      - yum_spacewalk_client_proxy_remove
+
+  - name: remove proxy password from yum when no spacewalk_client_proxy_yum_username is specified
+    lineinfile:
+      dest: /etc/yum.conf
+      regexp: '^[ \t]*spacewalk_client_proxy_password[ \t]*=[ \t]*.*'
+      state: absent
+    tags:
+      - yum_spacewalk_client_proxy_remove
+  when: spacewalk_client_proxy_yum_username | length == 0
