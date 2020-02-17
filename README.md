@@ -23,6 +23,109 @@ None.
 
 ## Role Variables
 
+    spacewalk_client_manage_service: true
+
+
+
+    spacewalk_client_service_enabled: true
+
+
+
+
+    spacewalk_client_service_status: 'restarted'  # Possible values are: reloaded, restarted, started, stopped
+
+
+
+
+    force_spacewalk_client_install: false
+
+
+
+
+    spacewalk_client_installer_force_download: true
+
+
+
+    spacewalk_client_installer_force_overwrite: true
+
+
+
+    spacewalk_client_installer_keep: true
+
+
+
+    spacewalk_client_installer_local: false  # The true means try to copy from Ansible's local files folder
+
+
+
+    spacewalk_client_cert_url: http://spw.example.com/pub/rhn-org-trusted-ssl-cert-1.0-1.noarch.rpm
+
+
+
+    spacewalk_client_server_url: http://spw.example.com/XMLRPC
+
+
+
+    spacewalk_client_ca_cert_path: /usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT
+
+
+
+    spacewalk_client_activation_key: ACTIVATION-KEY
+
+
+
+    spacewalk_client_download_validate_certs: 'yes'
+
+This variable sometimes does not get set and shouldn't be relied on.
+
+    spacewalk_client_ansible_distribution_major_version: '{{ ansible_distribution_major_version|int }}'
+
+
+
+    spacewalk_client_el6_url: http://yum.spacewalkproject.org/2.6-client/RHEL/6/x86_64/spacewalk-client-repo-2.6-0.el6.noarch.rpm
+
+
+
+    spacewalk_client_el7_url: https://copr-be.cloud.fedoraproject.org/results/%40spacewalkproject/spacewalk-2.9-client/epel-7-x86_64/00911911-spacewalk-repo/spacewalk-client-repo-2.9-4.el7.noarch.rpm
+
+
+
+
+    spacewalk_client_proxy_remove_after: true
+
+
+
+    spacewalk_client_install_dir: /opt/
+
+
+
+    spacewalk_client_dir_mode: '0770'
+
+
+
+    spacewalk_client_file_mode: '0660'
+
+
+
+    spacewalk_client_root_user: 'root'
+
+
+
+    spacewalk_client_root_group: 'root'
+
+
+
+    spacewalk_client_download_dir: '{{ spacewalk_client_install_dir }}/tmp'
+
+
+
+    spacewalk_client_service_name: osad
+
+
+
+    spacewalk_client_installed: false
+
+
 
 ## Dependencies
 

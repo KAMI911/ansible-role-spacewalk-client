@@ -28,3 +28,6 @@
 - name: disable old repos
   include_tasks: old_repos.yml
 
+- name: disable proxy settings
+  include_tasks: proxy_disable.yml
+  when: spacewalk_client_proxy_remove_after

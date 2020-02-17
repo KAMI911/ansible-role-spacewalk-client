@@ -1,5 +1,5 @@
 ---
-# disable repos tasks file for ansible-role-spacewalk-client- name: disable all current repositories
+# disable repos tasks file for ansible-role-spacewalk-client
 
 - name: disabling original repos
   lineinfile:

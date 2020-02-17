@@ -19,7 +19,7 @@ provisioner:
   inventory:
     group_vars:
       elseven:
-        spacewalk_client_version: 7
+        spacewalk_client_ansible_distribution_major_version: 7
 scenario:
   name: default
 verifier:
