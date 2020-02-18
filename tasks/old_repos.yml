@@ -7,7 +7,7 @@
     patterns: '*.repo'
     use_regex: no
     recurse: no
-  register: old_repos
+  register: old_repo
 
 - name: move original repos as *.old
   command: 'mv "{{ item }}" "{{ item }}.old"'
