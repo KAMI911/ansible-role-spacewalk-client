@@ -2,11 +2,13 @@
 # spacewalk client register tasks file for ansible-role-spacewalk-client
 
 - name: install Spacewalk client
+  become: true
   yum:
     name: '{{ spacewalk_client_download_dir }}/{{ spacewalk_client_download_file }}'
     state: present
 
 - name: install packages
+  become: true
   package:
     name: '{{ spacewalk_client_pacakges }}'
     state: present

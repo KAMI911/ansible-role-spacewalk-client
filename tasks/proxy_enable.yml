@@ -2,6 +2,7 @@
 # enabble repo proxy tasks file for ansible-role-spacewalk-client
 
 - name: add proxy to yum
+  become: true
   lineinfile:
     dest: /etc/yum.conf
     line: 'proxy={{ spacewalk_client_proxy_yum_url }}'
@@ -13,6 +14,7 @@
 
 - block:
   - name: add proxy username to yum
+    become: true
     lineinfile:
       dest: /etc/yum.conf
       line: 'proxy_username={{ spacewalk_client_proxy_yum_username }}'
@@ -22,6 +24,7 @@
       - yum_proxy
 
   - name: add proxy password to yum
+    become: true
     lineinfile:
       dest: /etc/yum.conf
       line: 'proxy_password={{ spacewalk_client_proxy_yum_password }}'

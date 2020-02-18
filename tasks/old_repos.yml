@@ -10,5 +10,6 @@
   register: old_repo
 
 - name: move original repos as *.old
+  become: true
   command: 'mv "{{ item }}" "{{ item }}.old"'
   with_items: '{{ old_repo.files }}'
