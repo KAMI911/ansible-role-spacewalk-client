@@ -3,7 +3,7 @@
 
 - name: restart spacewalk client
   service:
-    name: '{{ spacewalk_service_name }}'
-    state: '{{ spacewalk_service_status }}'
-    enabled: '{{ spacewalk_service_enabled }}'
+    name: '{{ spacewalk_client_service_name }}'
+    state: '{{ spacewalk_client_service_status }}'
+    enabled: '{{ spacewalk_client_service_enabled }}'
   listen: 'restart spacewalk service'
