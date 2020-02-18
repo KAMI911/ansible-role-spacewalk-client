@@ -11,5 +11,5 @@
 
 - name: move original repos as *.old
   become: true
-  command: 'mv "{{ item }}" "{{ item }}.old"'
+  command: 'mv "{{ item.path }}" "{{ item.path }}.old"'
   with_items: '{{ old_repo.files }}'
