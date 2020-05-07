@@ -3,7 +3,7 @@
 
 - name: install Spacewalk client
   become: true
-  yum:
+  package:
     name: '{{ spacewalk_client_download_dir }}/{{ spacewalk_client_download_file }}'
     state: present
 
@@ -14,7 +14,7 @@
     state: present
 
 - name: register to spacewalk server
-  become: true
+  become: true # noqa 301 305
   become_user: '{{ spacewalk_client_root_user }}'
   shell: >
     rhnreg_ks --serverUrl={{ spacewalk_client_server_url }} --sslCACert={{ spacewalk_client_ca_cert_path }} \

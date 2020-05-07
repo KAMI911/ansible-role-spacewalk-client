@@ -5,11 +5,18 @@ driver:
   name: docker
 platforms:
   - name: spacewalk-client-centos7
-    image: milcom/centos7-systemd
+    image: geerlingguy/docker-centos7-ansible
     image_version: latest
     privileged: true
     groups:
       - elseven
+  - name: spacewalk-client-centos8
+    image: geerlingguy/docker-centos8-ansible
+    image_version: latest
+    privileged: true
+    groups:
+      - eleight
+      - python3
 provisioner:
   name: ansible
   lint:
@@ -18,6 +25,10 @@ provisioner:
     group_vars:
       elseven:
         spacewalk_client_ansible_distribution_major_version: 7
+      eleight:
+        spacewalk_client_ansible_distribution_major_version: 8
+      python3:
+        ansible_python_interpreter: '/usr/bin/env python3'
 scenario:
   name: default
 verifier:

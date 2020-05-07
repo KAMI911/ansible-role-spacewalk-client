@@ -11,5 +11,5 @@
 
 - name: move original repos as *.old
   become: true
-  command: 'mv "{{ item.path }}" "{{ item.path }}.old"'
+  command: 'mv "{{ item.path }}" "{{ item.path }}.old"' # noqa 301
   with_items: '{{ old_repo.files }}'
