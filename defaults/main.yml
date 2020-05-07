@@ -24,7 +24,7 @@ spacewalk_client_ansible_distribution_major_version: '{{ ansible_distribution_ma
 
 spacewalk_client_el6_url: http://yum.spacewalkproject.org/2.6-client/RHEL/6/x86_64/spacewalk-client-repo-2.6-0.el6.noarch.rpm
 spacewalk_client_el7_url: https://copr-be.cloud.fedoraproject.org/results/%40spacewalkproject/spacewalk-2.9-client/epel-7-x86_64/00911911-spacewalk-repo/spacewalk-client-repo-2.9-4.el7.noarch.rpm
-spacewalk_client_el8_url: https://copr-be.cloud.fedoraproject.org/results/%40spacewalkproject/spacewalk-2.9-client/epel-7-x86_64/00911911-spacewalk-repo/spacewalk-client-repo-2.9-4.el7.noarch.rpm
+spacewalk_client_el8_url: https://copr-be.cloud.fedoraproject.org/results/%40spacewalkproject/spacewalk-2.10-client/epel-8-x86_64/01258160-spacewalk-repo/spacewalk-client-repo-2.10-8.el8.noarch.rpm
 
 spacewalk_client_proxy_yum_url: ''
 spacewalk_client_proxy_yum_username: ''
