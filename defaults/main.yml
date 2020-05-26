@@ -5,7 +5,7 @@ spacewalk_client_manage_service: true
 spacewalk_client_service_enabled: true
 spacewalk_client_service_status: 'restarted'  # Possible values are: reloaded, restarted, started, stopped
 
-force_spacewalk_client_install: false
+spacewalk_client_force_client_install: false
 
 spacewalk_client_installer_force_download: true
 spacewalk_client_installer_force_overwrite: true
